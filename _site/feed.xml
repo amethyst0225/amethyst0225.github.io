@@ -6,13 +6,14 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 15 Oct 2025 13:02:06 +0900</pubDate>
-    <lastBuildDate>Wed, 15 Oct 2025 13:02:06 +0900</lastBuildDate>
+    <pubDate>Wed, 15 Oct 2025 13:50:16 +0900</pubDate>
+    <lastBuildDate>Wed, 15 Oct 2025 13:50:16 +0900</lastBuildDate>
     <generator>Jekyll v3.10.0</generator>
     
       <item>
         <title>Knights Frontier</title>
         <description>&lt;h1 id=&quot;knights-frontier-활동-정리&quot;&gt;Knights Frontier 활동 정리&lt;/h1&gt;
+
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h5 id=&quot;버그바운티&quot;&gt;버그바운티&lt;/h5&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
