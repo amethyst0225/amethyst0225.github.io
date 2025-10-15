@@ -6,19 +6,25 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 15 Oct 2025 12:51:58 +0900</pubDate>
-    <lastBuildDate>Wed, 15 Oct 2025 12:51:58 +0900</lastBuildDate>
+    <pubDate>Wed, 15 Oct 2025 13:02:06 +0900</pubDate>
+    <lastBuildDate>Wed, 15 Oct 2025 13:02:06 +0900</lastBuildDate>
     <generator>Jekyll v3.10.0</generator>
     
       <item>
         <title>Knights Frontier</title>
         <description>&lt;h1 id=&quot;knights-frontier-활동-정리&quot;&gt;Knights Frontier 활동 정리&lt;/h1&gt;
-
-&lt;h5 id=&quot;버그헌팅&quot;&gt;버그헌팅&lt;/h5&gt;
-
-&lt;h5 id=&quot;개발&quot;&gt;개발&lt;/h5&gt;
-
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h5 id=&quot;버그바운티&quot;&gt;버그바운티&lt;/h5&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h5 id=&quot;ctf워게임&quot;&gt;CTF/워게임&lt;/h5&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h5 id=&quot;개발오픈소스&quot;&gt;개발/오픈소스&lt;/h5&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h5 id=&quot;기술문서블로그&quot;&gt;기술문서/블로그&lt;/h5&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h5 id=&quot;논문컨퍼런스&quot;&gt;논문/컨퍼런스&lt;/h5&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h5 id=&quot;기술문서블로그-1&quot;&gt;기술문서/블로그&lt;/h5&gt;
 
 </description>
         <pubDate>Wed, 15 Oct 2025 00:00:00 +0900</pubDate>

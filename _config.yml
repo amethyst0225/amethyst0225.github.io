@@ -10,8 +10,8 @@ description: > # this means to ignore newlines until "email:"
 
 email: wonyoungin04@gmail.com
 #blog logo
-logo: "/assets/images/logo.png"
-float_logo: true # true, false (default)
+# logo: "/assets/images/logo.png"
+# float_logo: true # true, false (default)
 
 # blog cover
 cover: "/assets/images/la.jpg"
@@ -22,8 +22,8 @@ author_image: "/assets/images/logo.png"
 
 paginate:	5
 
-url: "http://myblog.***.***" # the base hostname & protocol for your site
-baseurl: ""
+# url: "http://myblog.***.***" # the base hostname & protocol for your site
+# baseurl: ""
 #used to display twitter cards
 #twitter_handle: '@dirkfabisch'
 
