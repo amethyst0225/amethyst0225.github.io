@@ -4,7 +4,7 @@ title:  "Knights Frontier"
 date:   2025-10-15
 categories: "메인"
 tags: image
-image: /assets/article_images/2025-10-15-first-post/california.jpg
+image: /assets/article_images/2025-10-15-first-post/pinkwallpaper.png
 # image2: /assets/article_images/2025-10-15-first-post/night-track-mobile.JPG
 ---
 # Knights Frontier 활동 정리      
