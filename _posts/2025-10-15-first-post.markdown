@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "TBD"
-date:   2014-11-30 14:34:25
-categories: mediator feature
-tags: featured
-image: /assets/article_images/2014-11-30-mediator_features/night-track.JPG
-image2: /assets/article_images/2014-11-30-mediator_features/night-track-mobile.JPG
+title:  "Knights Frontier"
+date:   2025-10-15
+categories: "기술문서/블로그"
+tags: image
+image: /assets/article_images/2025-10-15-first-post/goldengatebridge.jpg
+image2: /assets/article_images/2025-10-15-first-post/night-track-mobile.JPG
 ---
 #Mediator Formats and CSS features
 

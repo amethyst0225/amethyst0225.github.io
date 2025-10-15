@@ -4,5 +4,5 @@ title: About
 permalink: /about/
 ---
 
-Korea Univ. 
+Korea Univ.  
 Department of Cyber Defense
