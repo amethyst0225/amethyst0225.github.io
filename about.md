@@ -9,6 +9,6 @@ Department of Cyber Defense (2023 ~ )
 
 # EXPERIENCE
 - 42 SEOUL 10th Cadet
-- Hunting Master (2025)
+- Bug Hunting Master Program (2025)
 - CyKor member (2025 ~ )
 - Knights Frontier (2025 ~ )
