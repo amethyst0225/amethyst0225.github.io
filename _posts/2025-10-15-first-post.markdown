@@ -5,7 +5,6 @@ date:   2025-10-15
 categories: "메인"
 tags: image
 image: /assets/article_images/2025-10-15-first-post/pink.png
-# image2: /assets/article_images/2025-10-15-first-post/night-track-mobile.JPG
 ---
 # 활동 정리      
 

@@ -16,12 +16,15 @@
             wordCountTarget: '.post-word-count',
         });
         
-        // Creates Captions from Alt tags
+        // Optionally create captions from image title (not alt)
+        // Using title avoids showing file names like "image.png" when alt is present for accessibility.
         $(".post-content img").each(function() {
-            // Let's put a caption if there is one
-            if($(this).attr("alt") && !$(this).hasClass("emoji"))
-              $(this).wrap('<figure class="image"></figure>')
-              .after('<figcaption>'+$(this).attr("alt")+'</figcaption>');
+            var title = $(this).attr("title");
+            if(title && !$(this).hasClass("emoji")) {
+              $(this)
+                .wrap('<figure class="image"></figure>')
+                .after('<figcaption>'+ title +'</figcaption>');
+            }
         });
         
     });
