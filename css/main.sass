@@ -361,6 +361,22 @@ body
     width: 100%
     font-family: $font-serif
     color: #333
+    // Inline code chips (valid in indented Sass)
+    code
+      background-color: #f6f8fa
+      border: 1px solid #e1e4e8
+      border-radius: 6px
+      padding: 0.12em 0.45em
+      font-family: Consolas, SFMono-Regular, Menlo, Monaco, "Courier New", monospace
+      font-size: 0.95em
+      color: #24292e
+    // Reset inside fenced/indented code blocks
+    pre code
+      background: transparent
+      border: 0
+      padding: 0
+      color: inherit
+      font-size: inherit
     // Table styling
     table
       border-collapse: collapse

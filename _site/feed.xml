@@ -6,9 +6,196 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 16 Oct 2025 22:24:19 +0900</pubDate>
-    <lastBuildDate>Thu, 16 Oct 2025 22:24:19 +0900</lastBuildDate>
+    <pubDate>Thu, 16 Oct 2025 23:15:01 +0900</pubDate>
+    <lastBuildDate>Thu, 16 Oct 2025 23:15:01 +0900</lastBuildDate>
     <generator>Jekyll v3.10.0</generator>
+    
+      <item>
+        <title>[BoB 프로젝트 주제 분석]</title>
+        <description>&lt;h1 id=&quot;solidity-기반-스마트-컨트랙트-취약점-분석-및-점검-툴-개발&quot;&gt;Solidity 기반 스마트 컨트랙트 취약점 분석 및 점검 툴 개발&lt;/h1&gt;
+
+&lt;h2 id=&quot;스마트-컨트랙트&quot;&gt;스마트 컨트랙트&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;블록체인 플랫폼에서 실행되는 자동화된 계약 프로그램&lt;/li&gt;
+  &lt;li&gt;Solidity로 작성된 스마트 컨트랙트는 배포 후 수정이 어렵고, 한 번의 실수가 막대한 자산 손실로 이어질 수 있음&lt;/li&gt;
+  &lt;li&gt;컨트랙트 배포 전 단계에서 재진입(Reentrancy), 접근제어 오류, 산술/가스 한도, 업그레이어블 패턴 위험 등을 조기에 탐지·차단하는 방법에 대한 연구가 필요&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;주제-선정-이유&quot;&gt;주제 선정 이유&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;탈중앙화 금융(DeFi), NFT, DAO 등 블록체인 기반 서비스가 확산되면서 스마트 컨트랙트의 사용 급증 → 이에 따라 보안 검증의 필요성도 함께 증가하고 있음&lt;/li&gt;
+  &lt;li&gt;스마트 컨트랙트의 오류는 시간이 지남에 따라 반복적으로 발생하며 금전적 손실을 발생시킴. 보안 도구 개발이 이러한 피해를 사전에 예방할 수 있는 실질적인 해결책&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;주요-스마트-컨트랙트-취약점-유형&quot;&gt;주요 스마트 컨트랙트 취약점 유형&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-reentrancy-attack-재진입-공격&quot;&gt;(1) &lt;a href=&quot;https://blog.chain.link/reentrancy-attacks-and-the-dao-hack/&quot;&gt;Reentrancy Attack&lt;/a&gt; (재진입 공격)&lt;/h3&gt;
+
+&lt;p&gt;재진입 공격은 외부 계약이 원래 함수로 다시 호출되어 코드 실행을 임의의 위치에서 재진입하는 방식으로 작동&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;공격 메커니즘&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-solidity highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 취약한 코드 예시
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;withdraw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;uint&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;amount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;balances&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sender&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;amount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sender&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;call&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;amount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 외부 호출이 먼저 발생
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;balances&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sender&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;amount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// 상태 변경이 나중에 발생
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;외부 계약의 출금 함수를 호출하기 직전에 userBalances의 상태를 업데이트함으로써 방지할 수 있음&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;방어 기법&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Checks-Effects-Interactions 패턴&lt;/li&gt;
+  &lt;li&gt;ReentrancyGuard 모디파이어 사용&lt;/li&gt;
+  &lt;li&gt;Mutex 패턴&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;2-integer-overflowunderflow&quot;&gt;(2) Integer Overflow/Underflow&lt;/h3&gt;
+
+&lt;p&gt;데이터 타입 범위를 초과하는 숫자를 추가할 때 발생&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;방어 기법&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;SafeMath 라이브러리 사용 (0.8.0 이전 버전)&lt;/li&gt;
+  &lt;li&gt;Solidity 0.8.0 이상 사용 (자동 체크)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;3-unchecked-external-calls&quot;&gt;(3) &lt;a href=&quot;https://www.cobalt.io/blog/smart-contract-security-risks&quot;&gt;Unchecked External Calls&lt;/a&gt;&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;스마트 컨트랙트가 외부 함수 호출의 결과를 검증하지 않을 때 발생하는 취약점&lt;/li&gt;
+  &lt;li&gt;호출이 실패해도 예외 오류를 발생시키지 않아 계약이 성공한 것처럼 진행될 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;방어 기법&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;transfer()&lt;/code&gt; 사용 (실패 시 자동 revert)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;send()&lt;/code&gt; 또는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;call()&lt;/code&gt;의 반환값 체크&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;4-access-control-문제&quot;&gt;(4) &lt;a href=&quot;https://hacken.io/discover/most-common-smart-contract-vulnerabilities/&quot;&gt;Access Control 문제&lt;/a&gt;&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Solidity의 함수는 가시성 지정자를 가지며, 이는 함수가 어떻게 호출될 수 있는지를 결정함&lt;/li&gt;
+  &lt;li&gt;함수의 기본 가시성은 public이므로, 가시성을 지정하지 않은 함수는 외부 사용자가 호출할 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;방어 기법&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;명시적으로 함수 가시성 지정&lt;/li&gt;
+  &lt;li&gt;적절한 접근 제어 메커니즘 구현&lt;/li&gt;
+  &lt;li&gt;다중 서명 지갑 관리&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;대표적인-해킹-사례-the-dao-attack-2016&quot;&gt;대표적인 해킹 사례: &lt;a href=&quot;https://coinmarketcap.com/academy/article/a-history-of-the-dao-hack&quot;&gt;The DAO Attack (2016)&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;The DAO는 2016년 이더리움 블록체인에서 시작된 탈중앙화 자율 조직으로, 토큰 세일을 통해 1억 5천만 달러 상당의 이더를 모금한 후 코드베이스의 취약점으로 인해 해킹당함&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;공격 과정&lt;/strong&gt;&lt;br /&gt;
+초당 100 ETH의 속도로 The DAO 스마트 컨트랙트에서 이더를 유출시킴&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;대응&lt;/strong&gt;&lt;br /&gt;
+하드 포크: The DAO 공격 이전으로 이더리움 네트워크의 히스토리를 되돌려 The DAO의 이더를 다른 스마트 컨트랙트로 재할당하여 투자자들이 자금을 인출할 수 있도록 함&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;결과&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;이더리움이 두 개의 체인으로 분할: Ethereum (ETH)과 Ethereum Classic (ETC)&lt;/li&gt;
+  &lt;li&gt;스마트 컨트랙트 보안의 중요성 부각&lt;/li&gt;
+  &lt;li&gt;감사(Audit) 문화 확립&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;최신-취약점-분석-도구&quot;&gt;최신 취약점 분석 도구&lt;/h2&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;1-정적-분석-도구&quot;&gt;(1) 정적 분석 도구&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.cyfrin.io/blog/industry-leading-smart-contract-auditing-and-security-tools&quot;&gt;&lt;strong&gt;Slither&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Python 기반&lt;/li&gt;
+  &lt;li&gt;Solidity 코드에 대한 광범위한 취약점 탐지기를 제공&lt;/li&gt;
+  &lt;li&gt;빠른 실행 시간, 낮은 오탐률, CI 파이프라인 통합 능력&lt;/li&gt;
+  &lt;li&gt;장점: 92개 이상의 취약점 탐지기, Python API를 통한 커스텀 분석&lt;/li&gt;
+  &lt;li&gt;지원: Hardhat, Foundry, DappTools&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.quillaudits.com/blog/smart-contract/smart-contract-security-tools-guide&quot;&gt;&lt;strong&gt;Aderyn&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Rust 기반&lt;/li&gt;
+  &lt;li&gt;Solidity 스마트 컨트랙트의 취약점을 탐지&lt;/li&gt;
+  &lt;li&gt;AST를 순회하여 잠재적 문제를 마크다운 형식으로 보고&lt;/li&gt;
+  &lt;li&gt;장점: 빠른 탐지, 낮은 오탐, CI/CD 통합, Nyth를 통한 커스텀 분석 프레임워크&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.rapidinnovation.io/post/top-7-smart-contract-audit-tools&quot;&gt;&lt;strong&gt;Mythril&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Python 기반 스마트 컨트랙트 감사 도구&lt;/li&gt;
+  &lt;li&gt;오염 분석 및 심볼릭 실행과 같은 고급 분석 기법을 제공&lt;/li&gt;
+  &lt;li&gt;EVM 바이트코드만으로도 분석이 가능&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;2-퍼징-도구&quot;&gt;(2) 퍼징 도구&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.quillaudits.com/blog/smart-contract/smart-contract-security-tools-guide&quot;&gt;&lt;strong&gt;Echidna&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;이더리움 스마트 컨트랙트를 위한 속성 기반 퍼징 도구&lt;/li&gt;
+  &lt;li&gt;사용자 정의 속성에 대해 계약을 테스트하여 취약점을 식별&lt;/li&gt;
+  &lt;li&gt;특징: 속성 기반 퍼징, 사용자 정의 assertion, 커버리지 리포팅&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.cyfrin.io/blog/industry-leading-smart-contract-auditing-and-security-tools&quot;&gt;&lt;strong&gt;Medusa&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Echidna에서 영감을 받은 실험적 스마트 컨트랙트 퍼저&lt;/li&gt;
+  &lt;li&gt;CLI 또는 Go API를 통한 병렬 퍼즈 테스트를 가능하게 함&lt;/li&gt;
+  &lt;li&gt;특징: 멀티스레드 병렬 퍼징, Solidity 속성 및 assertion 테스트, 커버리지 기반 퍼징&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.cyfrin.io/blog/industry-leading-smart-contract-auditing-and-security-tools&quot;&gt;&lt;strong&gt;Diligence Fuzzing&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Harvey로 구동되는 완전한 스마트 컨트랙트 퍼징 서비스 플랫폼&lt;/li&gt;
+  &lt;li&gt;Harvey는 이더리움 바이트코드를 위한 강력한 퍼저&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;3-형식-검증-도구&quot;&gt;(3) 형식 검증 도구&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.quillaudits.com/blog/smart-contract/smart-contract-security-tools-guide&quot;&gt;&lt;strong&gt;Halmos&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;이더리움 스마트 컨트랙트를 위한 오픈소스 형식 검증 도구&lt;/li&gt;
+  &lt;li&gt;계약 로직을 분석하기 위해 제한된 심볼릭 실행을 사용&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;4-ai-기반-도구&quot;&gt;(4) AI 기반 도구&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.quillaudits.com/blog/smart-contract/smart-contract-security-tools-guide&quot;&gt;&lt;strong&gt;QuillShield&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;일반적인 취약점을 넘어 논리적 오류를 탐지하여 스마트 컨트랙트 감사를 향상시킴&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.nature.com/articles/s41598-023-47219-0&quot;&gt;&lt;strong&gt;Lightning Cat&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;딥러닝 기법을 기반으로 한 솔루션&lt;/li&gt;
+  &lt;li&gt;CodeBERT 모델을 최적화하고 CNN과 결합하여 취약점 코드에서 중요한 특징을 추출하고 강력한 의미 분석 능력을 갖춤&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;5-통합-플랫폼&quot;&gt;(5) 통합 플랫폼&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.cyfrin.io/blog/industry-leading-smart-contract-auditing-and-security-tools&quot;&gt;&lt;strong&gt;Solodit&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;여러 보안 회사와 최고 연구자들의 15,000개 이상의 보안 취약점 및 버그 바운티를 집계&lt;/li&gt;
+  &lt;li&gt;기능: 8,000개 이상의 취약점 데이터베이스, 버그 바운티 추적, 감사 체크리스트&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 16 Oct 2025 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/%EA%B8%B0%EC%88%A0%EB%AC%B8%EC%84%9C/%EB%B8%94%EB%A1%9C%EA%B7%B8/2025/10/16/smart_contract.html</link>
+        <guid isPermaLink="true">http://localhost:4000/%EA%B8%B0%EC%88%A0%EB%AC%B8%EC%84%9C/%EB%B8%94%EB%A1%9C%EA%B7%B8/2025/10/16/smart_contract.html</guid>
+        
+        <category>image</category>
+        
+        
+        <category>기술문서/블로그</category>
+        
+      </item>
     
       <item>
         <title>[BoB 프로젝트 주제 분석]</title>
