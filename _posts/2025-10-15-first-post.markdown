@@ -13,6 +13,7 @@ image: /assets/article_images/2025-10-15-first-post/pink.png
 <br>
 [CVE-2025-55298](https://nvd.nist.gov/vuln/detail/CVE-2025-55298)  
 [CVE-2025-55212](https://nvd.nist.gov/vuln/detail/CVE-2025-55212)
+[CVE-2025-62594](https://nvd.nist.gov/vuln/detail/CVE-2025-62594)
 <br>
 ##### CTF/워게임
 <br>
